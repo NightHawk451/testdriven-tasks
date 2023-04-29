@@ -56,40 +56,6 @@ def test_added_task_retrieved_by_id(dynamodb_table):
     assert repository.get_by_id(task_id=task.id, owner=task.owner) == task
 
 
-@pytest.fixture
-def dynamodb_table():
-    with mock_dynamodb():
-        client = boto3.client("dynamodb")
-        table_name = "test-table"
-        client.create_table(
-            AttributeDefinitions=[
-                {"AttributeName": "PK", "AttributeType": "S"},
-                {"AttributeName": "SK", "AttributeType": "S"},
-                {"AttributeName": "GS1PK", "AttributeType": "S"},
-                {"AttributeName": "GS1SK", "AttributeType": "S"},
-            ],
-            TableName=table_name,
-            KeySchema=[
-                {"AttributeName": "PK", "KeyType": "HASH"},
-                {"AttributeName": "SK", "KeyType": "RANGE"},
-            ],
-            BillingMode="PAY_PER_REQUEST",
-            GlobalSecondaryIndexes=[
-                {
-                    "IndexName": "GS1",
-                    "KeySchema": [
-                        {"AttributeName": "GS1PK", "KeyType": "HASH"},
-                        {"AttributeName": "GS1SK", "KeyType": "RANGE"},
-                    ],
-                    "Projection": {
-                        "ProjectionType": "ALL",
-                    },
-                },
-            ],
-        )
-        yield table_name
-
-
 def test_open_tasks_listed(dynamodb_table):
     repository = TaskStore(table_name=dynamodb_table)
     open_task = Task.create(uuid.uuid4(), "Clean your office", "john@doe.com")
