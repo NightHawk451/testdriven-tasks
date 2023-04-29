@@ -13,6 +13,6 @@ app.add_middleware(
 
 @app.get("/api/health-check/")
 def health_check():
-    return {"message": "OK2"}
+    return {"message": "OK"}
 
 handle = Mangum(app)  # new
