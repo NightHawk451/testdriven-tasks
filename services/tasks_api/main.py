@@ -25,6 +25,8 @@ config = Config()
 
 
 def get_task_store() -> TaskStore:
+    print(f"table name: {config.TABLE_NAME}")
+    print(f"database url: {config.DYNAMODB_URL}")
     return TaskStore(config.TABLE_NAME, dynamodb_url=config.DYNAMODB_URL)
 
 
