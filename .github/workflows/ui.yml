@@ -10,6 +10,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: us-east-2
   APP_ENVIRONMENT: development
+  VITE_VUE_APP_API_URL: https://u2t28yxlv6.execute-api.us-east-2.amazonaws.com/development/api # new
 
 jobs:
   deploy-development:
