@@ -28,27 +28,11 @@ resources:
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: error.html
-    # TasksAPIBucketPolicy:
-    #   Type: "AWS::S3::BucketPolicy"
-    #   Properties:
-    #     Bucket: !Ref TasksAPIBucket
-    #     PolicyDocument:
-    #       Version: "2012-10-17"
-    #       Statement:
-    #         - Effect: Allow
-    #           Principal: "*"
-    #           Action:
-    #             - "s3:GetObject"
-    #           Resource: !Join ["", ["arn:aws:s3:::", !Ref TasksAPIBucket, "/*"]]
-    #     Policy:
-    #       Version: "2012-10-17"
-    #       Statement:
-    #         - Effect: Allow
-    #           Action:
-    #             - "s3:PutBucketPolicy"
-    #           Resource: !Join ["", ["arn:aws:s3:::", !Ref TasksAPIBucket]]
-    #           Principal:
-    #             AWS: arn:aws:iam::${AWS::AccountId}:root
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
     TasksAPIBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
