@@ -67,7 +67,9 @@ onMounted(() => {
                 <el-input v-model="createTaskForm.title" />
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="createTask">Create</el-button>
+                <el-button type="primary" @click="createTask"
+                  >Create!</el-button
+                >
               </el-form-item>
             </el-form>
           </el-card>
